@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사랑이뭐조 | 생물학적 사랑 vs 인문학적 사랑 테스트</title>
+  <style>
+    :root {
+      --bg-color: #F5EBEE;
+      --card-bg: #FFFFFF;
+      --primary-color: #B5717E;
+      --primary-hover: #9A6A73;
+      --text-main: #3A3233;
+      --text-sub: #7A6F72;
+      --border-color: #E2D1D6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      padding: 36px 28px;
+      box-shadow: 0 12px 30px rgba(181, 113, 126, 0.12);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* 인트로 섹션 */
+    .intro-box h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--primary-color);
+      line-height: 1.4;
+    }
+
+    .intro-box p {
+      font-size: 0.98rem;
+      line-height: 1.65;
+      color: var(--text-main);
+      margin-bottom: 24px;
+    }
+
+    .team-badge {
+      display: inline-block;
+      background-color: #F0E2E5;
+      color: var(--primary-color);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    /* 버튼 스타일 */
+    .btn {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* 질문 섹션 */
+    .progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background-color: #EFE7E9;
+      border-radius: 3px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: var(--primary-color);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .question-number {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .choice-btn {
+      width: 100%;
+      text-align: left;
+      background-color: #FAF6F7;
+      border: 1.5px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: 12px;
+      padding: 18px 16px;
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      line-height: 1.45;
+    }
+
+    .choice-btn:hover {
+      border-color: var(--primary-color);
+      background-color: #F3E8EA;
+    }
+
+    /* 결과 섹션 */
+    .result-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .result-emoji {
+      font-size: 3rem;
+      margin-bottom: 8px;
+    }
+
+    .result-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+    }
+
+    .result-box {
+      background-color: #FAF6F7;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border-color);
+    }
+
+    .result-box h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--primary-color);
+    }
+
+    .result-box p {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--text-main);
+    }
+
+    .notice-box {
+      background-color: #FCECEF;
+      border: 1px dashed var(--primary-color);
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .notice-box p {
+      font-size: 0.88rem;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      line-height: 1.45;
+    }
+
+    .gform-btn {
+      display: inline-block;
+      width: 100%;
+      background-color: #3A3233;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .gform-btn:hover {
+      background-color: #554A4C;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- 1. 인트로 화면 -->
+    <div id="intro-screen" class="intro-box">
+      <div class="team-badge">HAFS 소디포 ‘사랑이뭐조’</div>
+      <h1>생물학적 사랑 vs 인문학적 사랑</h1>
+      <p>
+        [안녕하세요, 저희는 사랑의 생물학적vs인본학적 관점 탐구와 생물학적 한계 극복 프로토콜에 대한 연구를 진행중인 ‘사랑이뭐조’의 1학년 2반 김려원, 이예서, 정윤서, 정나현입니다. 앞으로 진행하게 될 간단하면서도 재미있는 설문조사를 통해 여러분의 사랑 유형을 확인하실 수 있습니다! 조사에 응해주셔서 감사합니다. 의미있는 연구 자료로 쓰도록 하겠습니다.]
+      </p>
+      <button class="btn" onclick="startSurvey()">설문 진행하기</button>
+    </div>
+
+    <!-- 2. 질문 화면 -->
+    <div id="question-screen" class="hidden">
+      <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <div id="question-number" class="question-number">Q1 / 14</div>
+      <div id="question-text" class="question-text">질문 내용이 들어갑니다.</div>
+      <button id="choice-a" class="choice-btn" onclick="selectAnswer('A')">선택지 A</button>
+      <button id="choice-b" class="choice-btn" onclick="selectAnswer('B')">선택지 B</button>
+    </div>
+
+    <!-- 3. 결과 화면 -->
+    <div id="result-screen" class="hidden">
+      <div class="result-header">
+        <div id="result-emoji" class="result-emoji">🔥</div>
+        <div id="result-title" class="result-title">당신의 유형은 OOO입니다!</div>
+      </div>
+
+      <div class="result-box">
+        <h3>✨ 유형 특징</h3>
+        <p id="result-desc">유형 설명이 들어갑니다.</p>
+      </div>
+
+      <div class="result-box">
+        <h3>💌 당신을 위한 사랑 처방전</h3>
+        <p id="result-prescription">처방전 내용이 들어갑니다.</p>
+      </div>
+
+      <div class="notice-box">
+        <p>⚠️ <strong>꼭 읽어주세요!</strong><br>연구 통계와 HAFS 학우들의 분포 분석을 위해 아래 구글 폼에 꼭 본인의 유형을 제출해 주세요!</p>
+        <!-- 본인의 구글 폼 링크로 아래 href를 교체하세요 -->
+        <a href="https://forms.gle/여기에구글폼링크입력하세요" target="_blank" class="gform-btn">📊 구글 폼에 유형 제출하기</a>
+      </div>
+
+      <button class="btn" style="background-color: #8C7B7E; margin-top: 6px;" onclick="restartSurvey()">테스트 다시하기</button>
+    </div>
+  </div>
+
+  <script>
+    // 14가지 일상형 질문 데이터 (A: 버스식 / B: 프롬식)
+    const questions = [
+      {
+        q: "길을 가다가 진짜 내 취향인 사람을 마주쳤을 때 나는?",
+        a: "“와 미쳤다… 비주얼 진짜 내 스타일인데?” 속으로 내적 환호지름.",
+        b: "“오 잘생겼네/예쁘네.” 하고 말지, 대화 안 해보면 어떤 사람인지 몰라서 크게 신경 안 씀."
+      },
+      {
+        q: "사귄 지 1년째, 이제 만났을 때 가슴이 콩닥거리기보다 편안한 친구 같을 때 나는?",
+        a: "“어? 우리 설렘이 식은 건가?” 하고 갑자기 서운하고 불안해짐.",
+        b: "“오히려 좋아! 이제 진짜 편해졌으니까 우리끼리 더 잘 지내보자” 함."
+      },
+      {
+        q: "애인이 다른 이성 친구랑 카톡을 너무 길게 하거나 단둘이 밥 먹었다고 할 때 나는?",
+        a: "“아니 이걸 왜 그냥 넘어가? 당연히 찝찝하고 질투 나지” 하고 바로 따짐.",
+        b: "“그럴 수도 있지 뭐~” 하고 별생각 없이 넘김."
+      },
+      {
+        q: "엄청 좋아하던 애인데, 은근 찌질하거나 엄청 깨는 행동을 하는 걸 목격했을 때 나는?",
+        a: "“아… 이건 좀 아니지” 하면서 마음의 문이 훅 닫힘.",
+        b: "“사람인데 완벽할 수가 있나” 하고 오히려 인간미 느껴져서 더 귀여워 보임."
+      },
+      {
+        q: "내일 중요한 시험이라 예민해 죽겠는데, 애인이 “나 서운한 거 있어” 하면서 징징댈 때 나는?",
+        a: "“나 지금 시험 3일 남았다고…!” 답답해서 읽씹하거나 짜증부터 나옴.",
+        b: "“많이 서운했구나, 내가 이따 끝날 때까지 조금만 기다려줘” 하고 차분히 달래줌."
+      },
+      {
+        q: "주말에 모처럼 데이트를 한다면?",
+        a: "SNS에서 본 새로 생긴 핫플 가기, 테마파크 가기 등 무조건 신나고 새로운 거 하기.",
+        b: "그냥 조용한 카페 가서 각자 공부하거나 컵라면 먹으면서 수다 떨기."
+      },
+      {
+        q: "기념일에 애인한테 받고 싶은 선물은?",
+        a: "“와 인스타에 자랑하기 딱 좋다!” 소리 나오는 예쁘고 화려한 선물.",
+        b: "내가 한 달 전에 지나가듯 “이거 예쁘다” 했던 걸 기억해뒀다가 서프라이즈로 주는 선물."
+      },
+      {
+        q: "혹시라도 헤어지게 된다면, 내 마음에 더 대못 박히는 말은?",
+        a: "“미안한데… 너를 봐도 더 이상 가슴이 안 뛰어.” (설렘의 소멸)",
+        b: "“우리 서로 진짜 많이 노력했는데, 더는 안 되는 것 같아.”"
+      },
+      {
+        q: "애인이랑 대판 싸웠을 때 나의 기본 스탠스는?",
+        a: "“오늘 안에 무조건 결판 봐야 함. 화 풀릴 때까지 밤새서라도 카톡/전화해야 함.”",
+        b: "“지금 서로 감정 격해져 봐야 말 안 통하니까 머리 좀 식히고 내일 얘기하자.”"
+      },
+      {
+        q: "시간이 흘러서 애인의 외모가 바뀌거나 스타일이 변했을 때 나는?",
+        a: "솔직히 처음 만났을 때 그 반짝이던 매력이 줄어들면 마음도 살짝 싱거워짐.",
+        b: "외모가 어떻게 바뀌든 간에 우리가 쌓아온 추억과 믿음은 그대로임."
+      },
+      {
+        q: "나한테 '연애'란 기본적으로 어떤 느낌이야?",
+        a: "타이밍 맞게 찾아오는 찌릿하고 로맨틱한 이벤트 같은 것.",
+        b: "밥 먹고 공부하듯, 서로 맞춰가면서 공들여 유지해 나가는 일상 같은 것."
+      },
+      {
+        q: "오래 만나다 보면 오는 ‘권태기’가 찾아왔을 때 내 솔직한 생각은?",
+        a: "“아… 이 관계는 여기까지인가 보다” 하고 이별을 진지하게 고민함.",
+        b: "“원래 오래 만나면 이런 고비도 있는 거지 뭐” 하고 어떻게 풀지 대화함."
+      },
+      {
+        q: "내가 애인한테 뭐 해줄 때 내 속마음은?",
+        a: "내가 이거 해줬으니까 얘도 나한테 이정도는 챙겨주겠지? 하는 기대감이 살짝 있음.",
+        b: "그냥 얘가 좋아할 생각 하니까 나도 기분 좋아서 바라는 거 없이 해줌."
+      },
+      {
+        q: " 앞으로 내가 꿈꾸는 오래가는 연애의 비결은?",
+        a: "시간이 흘러도 서로가 지루하지 않게 새로운 설렘을 계속 만들어내는 것.",
+        b: "무슨 일이 있어도 도망치지 않고 끝까지 대화하고 서로의 편이 되어주는 것."
+      }
+    ];
+
+    const resultTypes = {
+      hotSpark: {
+        emoji: "🔥",
+        title: "1. 핫 스파크 불꽃러",
+        desc: "첫눈에 반하는 찌릿한 설렘과 불꽃 같은 끌림이 연애의 가장 핵심이라고 생각함. 관계가 반짝거릴 때는 세상 누구보다 뜨겁지만, 시간이 지나서 익숙해지면 '어? 나 마음이 식었나?' 하고 쉽게 불안해함.",
+        prescription: "처분에 불타오르던 설렘이 조금 잔잔해지는 건 누구에게나 찾아오는 당연한 일이야. 설렘이 줄어든 빈자리를 불안해하기보다, 편안함 속에서 새로운 대화나 일상을 만들어가는 연습을 해보자."
+      },
+      menthal: {
+        emoji: "🌿",
+        title: "2. 멘탈 유지 뚝배기러",
+        desc: "감정에 휘둘리기보다는 진득하게 관계를 가꿔가는 타입. 상대방이 조금 찌질하거나 부족한 모습을 보여도 '사람인데 그럴 수 있지' 하고 넓은 마음으로 품어주며, 대화와 노력으로 관계를 단단하게 유지함.",
+        prescription: "너무 이성적이고 책임감만 앞서서 관계를 끌고 가면, 연애가 무슨 과제나 숙제처럼 느껴질 수 있어. 가끔은 이유 없이 유치하고 설레는 낭만적인 데이트나 가벼운 일탈도 살짝 얹어보자."
+      },
+      balancer: {
+        emoji: "🚂",
+        title: "3. 로맨스 폭주 밸런서",
+        desc: "시작은 영화처럼 불같이 로맨틱하게 출발하지만, 시간이 흐를수록 현실적으로 서로를 이해하고 맞춰가는 황금 밸런스형.",
+        prescription: "감정과 이성의 균형을 참 잘 잡는 편이야! 다만 내가 생각하는 '노력의 기준'이 상대방에게는 살짝 부담이 될 수 있으니, 서로의 속도를 맞춰간다는 느낌으로 가주면 완벽해."
+      },
+      myway: {
+        emoji: "🧊",
+        title: "4. 쿨해 보이지만 마이웨이",
+        desc: "감정 소모하는 걸 제일 귀찮아하고, 연애 중에도 내 사생활과 혼자만의 시간을 엄청 소중하게 지키고 싶어 함.",
+        prescription: "'쿨한 것'과 '무관심한 것'은 한 끗 차이야. 내가 이 사람을 아끼고 있다는 걸 상대방이 느낄 수 있도록, 다정한 말 한마디나 작은 표현을 조금 더 자주 건네봐."
+      }
+    };
+
+    let currentIdx = 0;
+    let scoreA = 0;
+    let scoreB = 0;
+
+    const introScreen = document.getElementById('intro-screen');
+    const questionScreen = document.getElementById('question-screen');
+    const resultScreen = document.getElementById('result-screen');
+
+    const questionNumberEl = document.getElementById('question-number');
+    const questionTextEl = document.getElementById('question-text');
+    const choiceAEl = document.getElementById('choice-a');
+    const choiceBEl = document.getElementById('choice-b');
+    const progressBarEl = document.getElementById('progress-bar');
+
+    function startSurvey() {
+      currentIdx = 0;
+      scoreA = 0;
+      scoreB = 0;
+      introScreen.classList.add('hidden');
+      questionScreen.classList.remove('hidden');
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = questions[currentIdx];
+      questionNumberEl.innerText = `Q${currentIdx + 1} / ${questions.length}`;
+      questionTextEl.innerText = q.q;
+      choiceAEl.innerText = q.a;
+      choiceBEl.innerText = q.b;
+      const progressPercent = ((currentIdx) / questions.length) * 100;
+      progressBarEl.style.width = `${progressPercent}%`;
+    }
+
+    function selectAnswer(type) {
+      if (type === 'A') scoreA++;
+      else scoreB++;
+
+      currentIdx++;
+      if (currentIdx < questions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      questionScreen.classList.add('hidden');
+      resultScreen.classList.remove('hidden');
+
+      let selectedType;
+      // 14문항 기준 판별 로직
+      if (scoreA >= 9) {
+        selectedType = resultTypes.hotSpark;
+      } else if (scoreB >= 9) {
+        selectedType = resultTypes.menthal;
+      } else if (Math.abs(scoreA - scoreB) <= 2) {
+        selectedType = resultTypes.balancer;
+      } else {
+        selectedType = resultTypes.myway;
+      }
+
+      document.getElementById('result-emoji').innerText = selectedType.emoji;
+      document.getElementById('result-title').innerText = `당신의 유형은 [${selectedType.title}]입니다!`;
+      document.getElementById('result-desc').innerText = selectedType.desc;
+      document.getElementById('result-prescription').innerText = selectedType.prescription;
+    }
+
+    function restartSurvey() {
+      resultScreen.classList.add('hidden');
+      introScreen.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
